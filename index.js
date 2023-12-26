@@ -155,7 +155,9 @@ app.post("/make-shifts", async (req, res) => {
   };
 
   const daysCompletion = await openai.chat.completions.create({
-    model: "gpt-4",
+    // using gpt-4-1106-preview is pretty good
+    // please use gpt-3.5-turbo-1106 for testing purposes
+    model: "gpt-3.5-turbo-1106",
     messages: [
       {
         role: "system",
@@ -214,6 +216,7 @@ app.post("/make-shifts", async (req, res) => {
         //   and not scheduling them to be at the end of the day. Again, try your best, this doesn't always work.
       },
     ],
+    response_format: { type: "json_object" },
   });
 
   console.log(daysCompletion.choices[0].message, " is days");
