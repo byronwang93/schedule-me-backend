@@ -157,8 +157,8 @@ app.post("/make-shifts", async (req, res) => {
   const daysCompletion = await openai.chat.completions.create({
     // using gpt-4-1106-preview is pretty good
     // please use gpt-3.5-turbo-1106 for testing purposes
-    model: "gpt-3.5-turbo-1106",
-    // model: "gpt-4-1106-preview",
+    // model: "gpt-3.5-turbo-1106",
+    model: "gpt-4-1106-preview",
     messages: [
       {
         role: "system",
@@ -207,6 +207,8 @@ app.post("/make-shifts", async (req, res) => {
                 those people during that shift.
             8. Also note that each shift has a "numRequiredPeople" value which specifies how many people need to be assigned to this 
                 shift. Make sure each shift gets this value fulfilled unless it is not possible.
+            9. Only if there aren't enough people shifted because most people are unavailable during that time frame THEN you can
+                put down people for shifts they're unavailable for.
             9. Now you're going to try to optimize this shift schedule. Try your hardest to ensure that 
               everyone has an equal number of shifts and try to make sure the groupings are not the same for each shift. 
               This is most likely impossible so try your hardest.
